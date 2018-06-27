@@ -29,4 +29,4 @@
 
 ## Sample graph
 
-![] (https://github.com/ToyoBai/Algorithm/raw/master/Sorting-Algorithm/Sorting-Algorithm-Image/Selection_sort1.gif) 
+![](https://github.com/ToyoBai/Algorithm/raw/master/Sorting-Algorithm/Sorting-Algorithm-Image/Selection_sort1.gif/) 
