@@ -2,7 +2,8 @@
 
 ## Introduction
 
-    Start with the second element, if less than the previous element, iterate forward until it finds the correct position and inserts.
+    Start with the second element, if less than the previous element, iterate forward until it finds the correct
+    position and inserts.
 
 ## Picture examples
     Scattergram：
