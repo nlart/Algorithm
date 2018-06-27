@@ -1,1 +1,1 @@
-# Insertion sort
+# Selection sort
