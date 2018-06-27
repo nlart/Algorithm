@@ -9,7 +9,7 @@
 
 > 8、　3、　2、　4、　`1`、　5、　7、　6、　9　　//Faw data
 
->　　　　　　　　　　　　　　　　　　　　　　　    //　　　　　　　　　　　current min　　　current head
+>                                                     //　　　　　　　　　       current min　　　current head
 
 > 1、　3、　`2`、　4、　8、　5、　7、　6、　9　　//1 traversal:　　exchange　　a[4]　　and　　a[0]　　
 
