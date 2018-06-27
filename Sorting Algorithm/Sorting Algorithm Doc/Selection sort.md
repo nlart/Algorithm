@@ -5,7 +5,7 @@
 
 ## Examples
 
-> **0、　1、　2、　3、　4、　5、　6、　7、　8**　　//Index
+> 0、　1、　2、　3、　  4、　5、　6、　7、　8　　//Index
 
 > 8、　3、　2、　4、　`1`、　5、　7、　6、　9　　//Faw data
 
@@ -29,6 +29,35 @@
 
 ## Sample graph
 
-![Scattergram](https://github.com/ToyoBai/Algorithm/blob/master/Sorting%20Algorithm/Sorting%20Algorithm%20Image/Selection_sort1.gif?raw=true "scattergram")
+Scattergram：
 
-![Digital simulation](https://github.com/ToyoBai/Algorithm/blob/master/Sorting%20Algorithm/Sorting%20Algorithm%20Image/Selection_sort2.gif?raw=true "Digital simulation")
+
+> ![Scattergram](https://github.com/ToyoBai/Algorithm/blob/master/Sorting%20Algorithm/Sorting%20Algorithm%20Image/Selection_sort1.gif?raw=true "scattergram")
+
+Digital simulation：
+
+> ![Digital simulation](https://github.com/ToyoBai/Algorithm/blob/master/Sorting%20Algorithm/Sorting%20Algorithm%20Image/Selection-sort2.gif?raw=true "Digital simulation")
+
+## Complexity analysis
+    Exchange operation:
+      Best situation:　　0　　(such as: 1, 2, 3, 4)
+      Worst situation:　n-1　(sucn as: 3, 1, 4, 2)
+      
+    Comparison operation:
+                        n-1 + n-2 + ... + 1
+                        = (1 + n-1) * (n - 1) / 2
+                        = n(n-1)/2
+                        = O（n^2）                   
+## Code
+    void SelectionSort(int* a)                                    //parameter: array                
+    {
+      for (int result = 0; result < a.size - 1; result++)         //result: resultArray_index (sorted)
+      {
+        int currentMin = result;                                  //currentMin: currentMin_index
+        for (int index = result + 1; index <= a.size - 1; index++)//index: "cursor" to traversing the array
+          if (a[index] < a[currentMin])
+            currentMin = index;                                   //currentMin update
+          
+        std::swap(a[result], a[currentMin]);                      //element exchange
+      ｝
+    }
