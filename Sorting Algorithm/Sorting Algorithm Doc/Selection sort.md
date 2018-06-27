@@ -29,4 +29,6 @@
 
 ## Sample graph
 
-![](https://github.com/ToyoBai/Algorithm/raw/master/Sorting-Algorithm/Sorting-Algorithm-Image/Selection_sort1.gif/) 
+![Scattergram](https://github.com/ToyoBai/Algorithm/blob/master/Sorting%20Algorithm/Sorting%20Algorithm%20Image/Selection_sort1.gif?raw=true "scattergram")
+
+![Digital simulation](https://github.com/ToyoBai/Algorithm/blob/master/Sorting%20Algorithm/Sorting%20Algorithm%20Image/Selection_sort2.gif?raw=true "Digital simulation")
