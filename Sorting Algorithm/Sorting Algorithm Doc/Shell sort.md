@@ -1,6 +1,7 @@
 # Shell sort
 ## Introduction
-    Optimize insertion sorting by introducing the concept of step.In other words, insertion sort is considered to be a shell sort that step is 1.
+    Optimize insertion sorting by introducing the concept of step.
+    In other words, insertion sort is considered to be a shell sort that step is 1.
     
 ## Examples
     13  14  94  33  82  25  59  94  65  23  45  27  73  25  39  10    //Raw data
