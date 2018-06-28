@@ -34,12 +34,13 @@
                         = n(n-1)/2
                         = O（n^2）                   
 ## Code
-    void SelectionSort(int* a)                                    //parameter: array                
+    void SelectionSort(int* a, int size)                          //parameter: array                
     {
-      for (int result = 0; result < a.size - 1; result++)         //result: resultArray_index (sorted)
+      for (int result = 0; result < size - 1; result++)           //result: resultArray_index (sorted)
       {
         int currentMin = result;                                  //currentMin: currentMin_index
-        for (int index = result + 1; index <= a.size - 1; index++)//index: "cursor" to traversing the array
+        
+        for (int index = result + 1; index <= size - 1; index++)  //index: "cursor" to traversing the array
           if (a[index] < a[currentMin])
             currentMin = index;                                   //currentMin update
           
