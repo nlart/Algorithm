@@ -20,7 +20,7 @@
 ## Code
     void InsertionSort(int* a)                                                  //parameter: array
     {
-      for (int result = 1; result < a.size; result++)                              //Backward traversal to find the starting point for forward traversal
+      for (int result = 1; result < a.size; result++)                           //Backward traversal to find the starting point for forward traversal
         for (int index = result; index > 0 && a[index] < a[index - 1]; index--) //Forward traversal to find the target location
           std::swap(a[index], a[index - 1]);                                    //Element exchange
     }
