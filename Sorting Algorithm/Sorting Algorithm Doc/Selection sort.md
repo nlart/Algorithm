@@ -25,8 +25,8 @@
 
 ## Complexity analysis
     Exchange operation:
-      Best situation:　　0　　(such as: 1, 2, 3, 4)
-      Worst situation:　n-1　(sucn as: 3, 1, 4, 2)
+      Best situation:　　0       (such as: 1, 2, 3, 4)
+      Worst situation:　n-1      (sucn as: 3, 1, 4, 2)
       
     Comparison operation:
                         n-1 + n-2 + ... + 1
