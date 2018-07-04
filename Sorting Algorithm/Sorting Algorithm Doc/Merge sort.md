@@ -65,8 +65,8 @@ Digital simulation:
                 else if (temp[i] <= temp[j])
                     a[k] = temp[i++];
         }
-* Top-down merge sort:
-
+        
+        //Top-down merge sort:
         void mergeSortTopDown(int* a, int lo, int hi)   //Binary splitting
         {
             int mid = (lo + hi) / 2;
@@ -77,3 +77,27 @@ Digital simulation:
             mergeSortTopDown(a, mid+1, hi);             //recurse the right subarray
             merge(a, lo, hi);                           //merge sort currrent array
         }
+        
+        //This is an example:
+                                        a[]
+            index:    0   1   2   3   4   5   6   7   8   9   10
+            data:     9   4   1   3   2   8   5   7   6   0   1
+          
+        //Function call trace:
+        msDT(a, 0, 10)
+            msDT(a, 0, 5)
+                msDT(a, 0, 2)
+                    msDT(a, 0, 1)
+                        msDT(a, 0, 0)   //return    0   1   2   3   4   5   6   7   8   9   10
+                        msDT(a, 1, 1)   //return
+                        merge(a, 0, 1)  //data:     4   9   1   3   2   8   5   7   6   0   1
+                    msDT(a, 2, 2)       //return
+                    merge(a, 0, 2)      //data:     1   4   9   3   2   8   5   7   6   0   1
+                msDT(a, 3, 5)
+                    msDT(a, 3, 4)
+                        msDT(a, 3, 3)   //return
+                        msDT(a, 4, 4)   //return
+                        merge(a, 3, 4)  //data:     1   4   9   2   3   8   5   7   6   0   1
+                    msDT(a, 5, 5)       //return
+                    merge(a, 3, 5)      //data:     1   4   9   2   3   8   5   7   6   0   1
+            msDT(a, , 5)     
