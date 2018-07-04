@@ -45,5 +45,5 @@
             currentMin = index;                                   //currentMin update
           
           std::swap(a[result], a[currentMin]);                    //element exchange
-      ｝
+      }
     }
