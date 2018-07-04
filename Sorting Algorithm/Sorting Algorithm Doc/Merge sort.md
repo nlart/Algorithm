@@ -45,15 +45,15 @@ Digital simulation:
                           O(1) auxiliary with linked lists
                       
 ## Code
-        //common merge function:
+        //Universal merge function:
         void merge(int* a, int lo, int hi)              //Merge array a;    parameters: lo: min index; hi: max index
         {
-            int* temp;                                  //temp[]: Auxiliary array
+            int* temp = new int[hi + 1];                //temp[]: Auxiliary array
             for (int i = lo; i <= hi; i++)
                 temp[i] = a[i];
                 
             int mid = (lo + hi) / 2;
-            int i = lo, j = hi;                         //left and right "cursor"； i：0 ~ mid；  j：mid+1 ~ hi
+            int i = lo, j = mid + 1;                    //left and right "cursor"； i：0 ~ mid；  j：mid+1 ~ hi
             
             for (int k = lo; k <= hi; k++)              //get the result array
                 if (i > mid)                            //At the end of the left subarray traversal, you simply assign the right subarray to the result array one by one
