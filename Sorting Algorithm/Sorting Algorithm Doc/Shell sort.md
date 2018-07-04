@@ -59,7 +59,7 @@ Step is also called gap.
 [Please click here.](https://en.wikipedia.org/wiki/Shellsort)
 
 ## Code
-    void shellSort(int* a， int size)
+    void shellSort(int* a, int size)
     {
       int step = 1;
       
