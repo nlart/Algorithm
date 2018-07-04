@@ -78,10 +78,17 @@ Digital simulation:
             merge(a, lo, hi);                           //merge sort currrent array
         }
         
-### Here is the example by Top-down merge sort and it's function call trace:
+        //Bottom-up merge sort:
+        void mergeSortBottomUp(int* a, int lo, int hi)  //Binary splitting
+        {
+            int length = hi + 1;
+            for (int size = 2; size < length ; size *= 2)
+                for (int i = 0; i < length; )
+        }
+## Code appendix: the example by Top-down merge sort and it's function call trace:
                                  a[]
-    index:    0   1   2   3   4   5   6   7   8   9   10
-    data:     9   4   1   3   2   8   5   7   6   0   1    
+    Index:    0   1   2   3   4   5   6   7   8   9   10
+    Data:     9   4   1   3   2   8   5   7   6   0   1    
 
     Left merge sort:
         msDT(a, 0, 10)
