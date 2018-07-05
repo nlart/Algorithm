@@ -46,13 +46,13 @@ Digital simulation:
                       
 ## Code
         //Universal merge function:
-        void merge(int* a, int lo, int hi)              //Merge array a;    parameters: lo: min index; hi: max index
+        void merge(int* a, int lo, int mid, int hi)     //Merge array a;    parameters: lo: min index; hi: max index
         {
             int* temp = new int[hi + 1];                //temp[]: Auxiliary array
+            
             for (int i = lo; i <= hi; i++)
                 temp[i] = a[i];
                 
-            int mid = (lo + hi) / 2;
             int i = lo, j = mid + 1;                    //left and right "cursor"； i：0 ~ mid；  j：mid+1 ~ hi
             
             for (int k = lo; k <= hi; k++)              //get the result array
@@ -70,21 +70,23 @@ Digital simulation:
         void mergeSortTopDown(int* a, int lo, int hi)   //Binary splitting
         {
             int mid = (lo + hi) / 2;
+            
             if (hi <= lo)
                 return;
                 
             mergeSortTopDown(a, lo, mid);               //recurse the left subarray
             mergeSortTopDown(a, mid+1, hi);             //recurse the right subarray
-            merge(a, lo, hi);                           //merge sort currrent array
+            merge(a, lo, (lo + hi) / 2, hi);            //merge sort currrent array
         }
         
         //Bottom-up merge sort:
         void mergeSortBottomUp(int* a, int lo, int hi)  //Binary splitting
         {
             int length = hi + 1;
+            
             for (int size = 1; size < length ; size *= 2)
-                for (int i = 0; i < length; i += size*2)
-                    merge(a, i, i + size * 2 - 1 > hi ? hi : i + size * 2 - 1);
+                for (int i = 0; i < hi; i += size*2)    //or: i < length - size; (The comparison here is ingenious, i tried i < length, i < length - size * 2...)
+                    merge(a, i, i + size - 1, i + size * 2 - 1 > hi ? hi : i + size * 2 - 1);
         }
 ## Code appendix: 
 * The example by Top-down merge sort and it's function call trace:
@@ -93,7 +95,7 @@ Digital simulation:
         Index:    0   1   2   3   4   5   6   7   8   9   10
         Data:     9   4   1   3   2   8   5   7   6   0   1    
 
-        Left merge sort:
+        Left merge sort:    (Ignore the mid parameter of the merge function temporarily)
             msDT(a, 0, 10)
                 msDT(a, 0, 5)
                     msDT(a, 0, 2)
@@ -111,7 +113,7 @@ Digital simulation:
                         msDT(a, 5, 5)       //return
                         merge(a, 3, 5)      //data:     1   4   9   2   3   8   5   7   6   0   1
                     merge(a, 0, 5)          //data:     1   2   3   4   8   9   5   7   6   0   1
-        Right merge sort:
+        Right merge sort:   (Ignore the mid parameter of the merge function temporarily)
                 msDT(a, 6, 10) 
                     msDT(a, 6, 8)
                         msDT(a, 6, 7)
@@ -125,4 +127,25 @@ Digital simulation:
                         msDT(a, 10, 10)     //return
                         merge(a, 9, 10)     //data:     1   2   3   4   8   9   5   6   7   0   1
                     merge(a, 6, 10)         //data:     1   2   3   4   8   9   0   1   5   6   7
-                merge(a, 0, 10)             //data:     0   1   1   2   3   4   5   6   7   8   9   
+                merge(a, 0, 10)             //data:     0   1   1   2   3   4   5   6   7   8   9 
+                
+* The example by Bottom-up merge sort and it's function call trace:
+
+                                 a[]
+        Index:    0   1   2   3   4   5   6   7   8
+        Data:     9   8   7   3   1   2   5   3   6
+        
+        size = 1:   (merge one by one)
+            merge(a, lo, mid, hi)   //mid = lo + size - 1;
+                                    //Index:    0   1   2   3   4   5   6   7   8
+            merge(a, 0, 0, 1)       //Data:     8   9   7   3   1   2   5   3   6
+            merge(a, 2, 2, 3)       //Data:     8   9   3   7   1   2   5   3   6  
+            merge(a, 4, 4, 5)       //Data:     8   9   3   7   1   2   5   3   6
+            merge(a, 6, 6, 7)       //Data:     8   9   3   7   1   2   3   5   6
+        size = 2:   (merge two by two)
+            merge(a, 0, 1, 3)       //Data:     3   7   8   9   1   2   3   5   6
+            merge(a, 4, 5, 7)       //Data:     3   7   8   9   1   2   3   5   6
+        size = 4:   (merge four by four)
+            merge(a, 0, 3, 7)       //Data:     1   2   3   3   5   7   8   9   6
+        size = 8:   (merge eight by eight)
+            merge(a, 0, 7, 8)       //Data:     1   2   3   3   5   6   7   8   9   
