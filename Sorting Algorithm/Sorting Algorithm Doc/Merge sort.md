@@ -82,44 +82,47 @@ Digital simulation:
         void mergeSortBottomUp(int* a, int lo, int hi)  //Binary splitting
         {
             int length = hi + 1;
-            for (int size = 2; size < length ; size *= 2)
-                for (int i = 0; i < length; )
+            for (int size = 1; size < length ; size *= 2)
+                for (int i = 0; i < length; i += size*2)
+                    merge(a, i, i + size * 2 - 1 > hi ? hi : i + size * 2 - 1);
         }
-## Code appendix: the example by Top-down merge sort and it's function call trace:
-                                 a[]
-    Index:    0   1   2   3   4   5   6   7   8   9   10
-    Data:     9   4   1   3   2   8   5   7   6   0   1    
+## Code appendix: 
+* The example by Top-down merge sort and it's function call trace:
 
-    Left merge sort:
-        msDT(a, 0, 10)
-            msDT(a, 0, 5)
-                msDT(a, 0, 2)
-                    msDT(a, 0, 1)
-                        msDT(a, 0, 0)   //return    0   1   2   3   4   5   6   7   8   9   10
-                        msDT(a, 1, 1)   //return
-                        merge(a, 0, 1)  //data:     4   9   1   3   2   8   5   7   6   0   1
-                    msDT(a, 2, 2)       //return
-                    merge(a, 0, 2)      //data:     1   4   9   3   2   8   5   7   6   0   1
-                msDT(a, 3, 5)
-                    msDT(a, 3, 4)
-                        msDT(a, 3, 3)   //return
-                        msDT(a, 4, 4)   //return
-                        merge(a, 3, 4)  //data:     1   4   9   2   3   8   5   7   6   0   1
-                    msDT(a, 5, 5)       //return
-                    merge(a, 3, 5)      //data:     1   4   9   2   3   8   5   7   6   0   1
-                merge(a, 0, 5)          //data:     1   2   3   4   8   9   5   7   6   0   1
-    Right merge sort:
-            msDT(a, 6, 10) 
-                msDT(a, 6, 8)
-                    msDT(a, 6, 7)
-                        msDT(a, 6, 6)   //return
-                        msDT(a, 7, 7)   //return
-                        merge(a, 6, 7)  //data:     1   2   3   4   8   9   5   7   6   0   1
-                    msDT(a, 8, 8)       //return
-                    merge(a, 6, 8)      //data:     1   2   3   4   8   9   5   6   7   0   1
-                msDT(a, 9, 10)
-                    msDT(a, 9, 9)       //return
-                    msDT(a, 10, 10)     //return
-                    merge(a, 9, 10)     //data:     1   2   3   4   8   9   5   6   7   0   1
-                merge(a, 6, 10)         //data:     1   2   3   4   8   9   0   1   5   6   7
-            merge(a, 0, 10)             //data:     0   1   1   2   3   4   5   6   7   8   9   
+                                     a[]
+        Index:    0   1   2   3   4   5   6   7   8   9   10
+        Data:     9   4   1   3   2   8   5   7   6   0   1    
+
+        Left merge sort:
+            msDT(a, 0, 10)
+                msDT(a, 0, 5)
+                    msDT(a, 0, 2)
+                        msDT(a, 0, 1)
+                            msDT(a, 0, 0)   //return    0   1   2   3   4   5   6   7   8   9   10
+                            msDT(a, 1, 1)   //return
+                            merge(a, 0, 1)  //data:     4   9   1   3   2   8   5   7   6   0   1
+                        msDT(a, 2, 2)       //return
+                        merge(a, 0, 2)      //data:     1   4   9   3   2   8   5   7   6   0   1
+                    msDT(a, 3, 5)
+                        msDT(a, 3, 4)
+                            msDT(a, 3, 3)   //return
+                            msDT(a, 4, 4)   //return
+                            merge(a, 3, 4)  //data:     1   4   9   2   3   8   5   7   6   0   1
+                        msDT(a, 5, 5)       //return
+                        merge(a, 3, 5)      //data:     1   4   9   2   3   8   5   7   6   0   1
+                    merge(a, 0, 5)          //data:     1   2   3   4   8   9   5   7   6   0   1
+        Right merge sort:
+                msDT(a, 6, 10) 
+                    msDT(a, 6, 8)
+                        msDT(a, 6, 7)
+                            msDT(a, 6, 6)   //return
+                            msDT(a, 7, 7)   //return
+                            merge(a, 6, 7)  //data:     1   2   3   4   8   9   5   7   6   0   1
+                        msDT(a, 8, 8)       //return
+                        merge(a, 6, 8)      //data:     1   2   3   4   8   9   5   6   7   0   1
+                    msDT(a, 9, 10)
+                        msDT(a, 9, 9)       //return
+                        msDT(a, 10, 10)     //return
+                        merge(a, 9, 10)     //data:     1   2   3   4   8   9   5   6   7   0   1
+                    merge(a, 6, 10)         //data:     1   2   3   4   8   9   0   1   5   6   7
+                merge(a, 0, 10)             //data:     0   1   1   2   3   4   5   6   7   8   9   
