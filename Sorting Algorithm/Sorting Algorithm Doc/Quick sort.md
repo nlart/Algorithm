@@ -31,24 +31,6 @@ Digital simulation:
                             O(log n) auxiliary
 ## Partition scheme
 [Please click here.](https://en.wikipedia.org/wiki/Quicksort "wikipedia")
-
-## Demo examples
-                                    a[]
-        Index：  0   1   2   3   4   5   6   7   8   9   10
-        Data：   9   7   3   6   4   5   8   0   5   2   1
-    
-    pivot = a[0]:
-        Index：  0   1   2   3   4   5   6   7   8   9   10
-                     i                                   j
-        Data：   9   7   3   6   4   5   8   0   5   2   1       
-                         i                               j      //a[i] < pivot: i++;
-        Data：   9   7   3   6   4   5   8   0   5   2   1       
-                         i                           j          //a[j] < pivot: exch(a[j--], pivot);
-        Data：   1   7   3   6   4   5   8   0   5   2   9       
-                             i                       j          //a[i] < pivot: i++;
-        Data：   1   7   3   6   4   5   8   0   5   2   9   
-                             i                       j          //a[j] < pivot: i++;
-        Data：   1   7   3   6   4   5   8   0   5   2   9   
         
 ## Code  
         void quickSort(int* a, int lo, int hi)
@@ -56,13 +38,13 @@ Digital simulation:
             if (hi <= lo)
                 return;
 
-            int pivot = lo, i = lo + 1, j = hi;
+            int pivot = lo, i = lo + 1, j = hi;     //Here i always set the first element as the pivot; i,j: left and right scan pointer.
 
-            while (i <= j)
+            while (i <= j)                          //i,j havn't met.
             {
-                if (a[i] > a[pivot])
+                if (a[i] > a[pivot])                //if the left elements > 'the pivot', exchange a[i] and a[j] to make sure the bigger elements are always on the right. Then j--.
                     std::swap(a[i], a[j--]);
-                else
+                else                                //if the left elements <= 'the pivot', exchange a[i] and a[pivot] to make sure the smaller elements are always on the right. Then i++.(pay attention that when the exchange happened, pivot need to be updated)
                 {
                     std::swap(a[i++], a[pivot]);
                     pivot = i - 1;
@@ -72,3 +54,34 @@ Digital simulation:
             quickSort(a, 0, pivot - 1);
             quickSort(a, pivot + 1, hi);
         }
+
+## Demo examples
+                                    a[]
+        Index：  0   1   2   3   4   5   6   7   8   9   10
+        Data：   9   7   3   6   4   5   8   0   5   2   1
+
+    a[pivot] = 9:                        //here p is pivot
+        Index：  0   1   2   3   4
+                 p   i           j
+        Data：   9   3   6   4   3       //a[i] < a[pivot]: swap(a[i++], a[pivot]); pivot = i - 1;
+                     p   i       j
+        Data：   3   9   6   4   3       //a[i] < a[pivot]: swap(a[i++], a[pivot]); pivot = i - 1;
+                         p   i   j
+        Data：   3   6   9   4   3       //a[i] < a[pivot]: swap(a[i++], a[pivot]); pivot = i - 1;
+                             p  ij
+        Data：   3   6   4   9   3       //a[i] < a[pivot]: swap(a[i++], a[pivot]); pivot = i - 1;
+                                 pj  i
+        Data：   3   6   4   3   9       //finished
+    a[pivot] = 3:
+                 p   i           j
+        Data:    3   6   4   3   9       //a[i] > a[pivot]: swap(a[i], a[j--]);
+                 p   i       j
+        Data:    3   9   4   3   6       //a[i] > a[pivot]: swap(a[i], a[j--]);
+                 p   i   j
+        Data:    3   3   4   9   6       //a[i] = a[pivot]: swap(a[i++], a[pivot]); pivot = i - 1;  (optimizable)
+                     p  ij
+        Data:    3   3   4   9   6       //a[i] > a[pivot]: swap(a[i], a[j--]);                     (optimizable)
+                    pj   i
+        Data:    3   3   4   9   6       //finished
+        
+        
