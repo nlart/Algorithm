@@ -40,11 +40,11 @@ Digital simulation:
 	    if (lo >= hi)
 		    return;
 
-        while (i < j)				//place the large elements to the right of the array and the small elements to the left
+        while (i < j)			//place the large elements to the right of the array and the small elements to the left
         {
             while (a[j] > pivot)		//Right traversal
                 --j;
-            if (i < j)				//A judgment statement is added here to avoid extreme cases such as "1, 4, 2, 3"
+            if (i < j)			//A judgment statement is added here to avoid extreme cases such as "1, 4, 2, 3"
                 a[i++] = a[j];
 
             while (a[i] < pivot)		//Left traversal
