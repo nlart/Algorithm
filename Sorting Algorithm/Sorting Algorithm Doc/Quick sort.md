@@ -40,14 +40,14 @@ Digital simulation:
 	    if (lo >= hi)
 		    return;
 
-        while (i < j)                           //place the large elements to the right of the array and the small elements to the left
+        while (i < j)				//place the large elements to the right of the array and the small elements to the left
         {
-            while (a[j] > pivot)                //Right traversal
+            while (a[j] > pivot)		//Right traversal
                 --j;
-            if (i < j)                          //A judgment statement is added here to avoid extreme cases such as "1, 4, 2, 3"
+            if (i < j)				//A judgment statement is added here to avoid extreme cases such as "1, 4, 2, 3"
                 a[i++] = a[j];
 
-            while (a[i] < pivot)                //Left traversal
+            while (a[i] < pivot)		//Left traversal
                 ++i;
             if (i < j)
                 a[j--] = a[i];
@@ -68,18 +68,18 @@ Digital simulation:
     Traverse direction: j -> i;
     
             i                       j
-    Data:   5   1   6   2   7   9   3       //Traverse direction: j -> i;           a[j] < pivot: a[i++] = a[j];  
+    Data:   5   1   6   2   7   9   3       //Traverse direction: j -> i;		a[j] < pivot: a[i++] = a[j];  
                 i                   j
-    Data:   3   1   6   2   7   9   3       //Traverse direction: i -> j(changed);  a[i] < pivot: i++;
+    Data:   3   1   6   2   7   9   3       //Traverse direction: i -> j(changed);	a[i] < pivot: i++;
                     i               j
-    Data:   3   1   6   2   7   9   3       //Traverse direction: i -> j;  	    a[i] > pivot: a[j--] = a[i];
+    Data:   3   1   6   2   7   9   3       //Traverse direction: i -> j;		a[i] > pivot: a[j--] = a[i];
                     i           j
-    Data:   3   1   6   2   7   9   6       //Traverse direction: j -> i(changed);  a[j] > pivot: j--;
+    Data:   3   1   6   2   7   9   6       //Traverse direction: j -> i(changed);	a[j] > pivot: j--;
                     i       j
-    Data:   3   1   6   2   7   9   6       //Traverse direction: j -> i;	    a[j] > pivot: j--;
+    Data:   3   1   6   2   7   9   6       //Traverse direction: j -> i;		a[j] > pivot: j--;
                     i   j
-    Data:   3   1   6   2   7   9   6       //Traverse direction: j -> i;  	    a[j] < pivot: a[i++] = a[j];
+    Data:   3   1   6   2   7   9   6       //Traverse direction: j -> i;		a[j] < pivot: a[i++] = a[j];
                        ij
-    Data:   3   1   2   2   7   9   6       //Traverse direction: i -> j(changed);  a[i] = pivot;
+    Data:   3   1   2   2   7   9   6       //Traverse direction: i -> j(changed);	a[i] = pivot;
                        ij
     Data:   3   1   2   5   7   9   6       //finished; then quickSort recursion
