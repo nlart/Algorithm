@@ -33,55 +33,44 @@ Digital simulation:
 [Please click here.](https://en.wikipedia.org/wiki/Quicksort "wikipedia")
         
 ## Code  
-        void quickSort(int* a, int lo, int hi)
+    void quicksort(int* a, int lo, int hi)		
+    {
+	    int i = lo, j = hi, pivot = a[lo];	    //pivot：always the first element in the array
+
+	    if (lo >= hi)
+		    return;
+
+        while (i < j)                           //place the large elements to the right of the array and the small elements to the left
         {
-            if (hi <= lo)
-                return;
+            while (a[j] > pivot)                //Right traversal
+                --j;
+            if (i < j)                          //A judgment statement is added here to avoid extreme cases such as "1, 4, 2, 3"
+                a[i++] = a[j];
 
-            int pivot = lo, i = lo + 1, j = hi;     //Here i always set the first element as the pivot; i,j: left and right scan pointer.
-
-            while (i <= j)                          //i,j havn't met.
-            {
-                if (a[i] > a[pivot])                //if the left elements > 'the pivot', exchange a[i] and a[j] to make sure the bigger elements are always on the right. Then j--.
-                    std::swap(a[i], a[j--]);
-                else                                //if the left elements <= 'the pivot', exchange a[i] and a[pivot] to make sure the smaller elements are always on the right. Then i++.(pay attention that when the exchange happened, pivot need to be updated)
-                {
-                    std::swap(a[i++], a[pivot]);
-                    pivot = i - 1;
-                }
-            }
-
-            quickSort(a, 0, pivot - 1);
-            quickSort(a, pivot + 1, hi);
+            while (a[i] < pivot)                //Left traversal
+                ++i;
+            if (i < j)
+                a[j--] = a[i];
         }
 
-## Demo examples
-                                    a[]
-        Index：  0   1   2   3   4   5   6   7   8   9   10
-        Data：   9   7   3   6   4   5   8   0   5   2   1
+        a[i] = pivot;
 
-    a[pivot] = 9:                        //here p is pivot
-        Index：  0   1   2   3   4
-                 p   i           j
-        Data：   9   3   6   4   3       //a[i] < a[pivot]: swap(a[i++], a[pivot]); pivot = i - 1;
-                     p   i       j
-        Data：   3   9   6   4   3       //a[i] < a[pivot]: swap(a[i++], a[pivot]); pivot = i - 1;
-                         p   i   j
-        Data：   3   6   9   4   3       //a[i] < a[pivot]: swap(a[i++], a[pivot]); pivot = i - 1;
-                             p  ij
-        Data：   3   6   4   9   3       //a[i] < a[pivot]: swap(a[i++], a[pivot]); pivot = i - 1;
-                                 pj  i
-        Data：   3   6   4   3   9       //finished
-    a[pivot] = 3:
-                 p   i           j
-        Data:    3   6   4   3   9       //a[i] > a[pivot]: swap(a[i], a[j--]);
-                 p   i       j
-        Data:    3   9   4   3   6       //a[i] > a[pivot]: swap(a[i], a[j--]);
-                 p   i   j
-        Data:    3   3   4   9   6       //a[i] = a[pivot]: swap(a[i++], a[pivot]); pivot = i - 1;  (optimizable)
-                     p  ij
-        Data:    3   3   4   9   6       //a[i] > a[pivot]: swap(a[i], a[j--]);                     (optimizable)
-                    pj   i
-        Data:    3   3   4   9   6       //finished
+        quicksort(a, lo, i - 1);
+        quicksort(a, i + 1, hi);
+    }
+    
+## Code deduction
+                    a[]
+    Index:  0   1   2   3   4   5   6
+    Data:   5   1   6   2   7   9   3
         
-        
+    pivot = a[0] = 5;   
+    Traverse direction: j -> i;
+    
+            i                       j
+    Data:   5   1   6   2   7   9   3       //Traverse direction: j -> i;           a[j] < pivot: a[i++] = a[j];  
+                i                   j
+    Data:   3   1   6   2   7   9   3       //Traverse direction: i -> j(changed);  a[i] < pivot: i++;
+                i                   j
+    Data:   3   1   6   2   7   9   3       //Traverse direction: i -> j(changed);  a[i] < pivot: i++;
+    
