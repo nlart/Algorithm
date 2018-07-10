@@ -33,9 +33,9 @@ Digital simulation:
 [Please click here.](https://en.wikipedia.org/wiki/Quicksort "wikipedia")
         
 ## Code  
-    void quicksort(int* a, int lo, int hi)		
+    void quickSort(int* a, int lo, int hi)		
     {
-	    int i = lo, j = hi, pivot = a[lo];	    //pivot：always the first element in the array
+	    int i = lo, j = hi, pivot = a[lo];	//pivot：always the first element in the array
 
 	    if (lo >= hi)
 		    return;
@@ -55,8 +55,8 @@ Digital simulation:
 
         a[i] = pivot;
 
-        quicksort(a, lo, i - 1);
-        quicksort(a, i + 1, hi);
+        quickSort(a, lo, i - 1);
+        quickSort(a, i + 1, hi);
     }
     
 ## Code deduction
@@ -71,6 +71,15 @@ Digital simulation:
     Data:   5   1   6   2   7   9   3       //Traverse direction: j -> i;           a[j] < pivot: a[i++] = a[j];  
                 i                   j
     Data:   3   1   6   2   7   9   3       //Traverse direction: i -> j(changed);  a[i] < pivot: i++;
-                i                   j
-    Data:   3   1   6   2   7   9   3       //Traverse direction: i -> j(changed);  a[i] < pivot: i++;
-    
+                    i               j
+    Data:   3   1   6   2   7   9   3       //Traverse direction: i -> j;  	    a[i] > pivot: a[j--] = a[i];
+                    i           j
+    Data:   3   1   6   2   7   9   6       //Traverse direction: j -> i(changed);  a[j] > pivot: j--;
+                    i       j
+    Data:   3   1   6   2   7   9   6       //Traverse direction: j -> i;	    a[j] > pivot: j--;
+                    i   j
+    Data:   3   1   6   2   7   9   6       //Traverse direction: j -> i;  	    a[j] < pivot: a[i++] = a[j];
+                       ij
+    Data:   3   1   2   2   7   9   6       //Traverse direction: i -> j(changed);  a[i] = pivot;
+                       ij
+    Data:   3   1   2   5   7   9   6       //finished; then quickSort recursion
