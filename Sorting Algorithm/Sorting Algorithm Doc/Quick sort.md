@@ -58,8 +58,8 @@ Digital simulation:
 	    quickSort(a, lo, i - 1);
 	    quickSort(a, i + 1, hi);
 	}
-
-	Another implementation（algorithms 4th edition）:
+	
+	-------------	Another implementation（algorithms 4th edition）:	--------------
 
 	void quickSort(int* a, int lo, int hi)
 	{
@@ -86,6 +86,9 @@ Digital simulation:
 	    quickSort(a, lo, j - 1);
 	    quickSort(a, j + 1, hi);
 	}
+	
+	-------------	comparison:	--------------
+	The first implementation needn't do swap operation and the operation to scan the array is almost constant, so it's more efficient, i think. :)
 ## Code deduction
                     a[]
     Index:  0   1   2   3   4   5   6
