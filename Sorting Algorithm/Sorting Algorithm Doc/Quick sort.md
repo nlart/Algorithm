@@ -32,33 +32,60 @@ Digital simulation:
 ## Partition scheme
 [Please click here.](https://en.wikipedia.org/wiki/Quicksort "wikipedia")
         
-## Code  
-    void quickSort(int* a, int lo, int hi)		
-    {
-	    int i = lo, j = hi, pivot = a[lo];	//pivot：always the first element in the array
-
+## Code
+	void quickSort(int* a, int lo, int hi)
+	{
 	    if (lo >= hi)
-		    return;
+		return;
+			
+	    int i = lo, j = hi, pivot = a[lo];    //pivot：always the first element in the array
 
-        while (i < j)			//place the large elements to the right of the array and the small elements to the left
-        {
-            while (a[j] > pivot)		//Right traversal
-                --j;
-            if (i < j)			//A judgment statement is added here to avoid extreme cases such as "1, 4, 2, 3"
-                a[i++] = a[j];
+	    while (i < j)                         //place the large elements to the right of the array and the small elements to the left
+	    {
+		while (i < j && a[j] > pivot)     //Right traversal
+		    --j;
+		if (i < j)                        //A judgment statement is added here to avoid extreme cases such as "1, 4, 2, 3"
+		    a[i++] = a[j];
 
-            while (a[i] < pivot)		//Left traversal
-                ++i;
-            if (i < j)
-                a[j--] = a[i];
-        }
+		while (i < j && a[i] < pivot)     //Left traversal
+		    ++i;
+		if (i < j)
+		    a[j--] = a[i];
+	    }
 
-        a[i] = pivot;
+	    a[i] = pivot;
 
-        quickSort(a, lo, i - 1);
-        quickSort(a, i + 1, hi);
-    }
-    
+	    quickSort(a, lo, i - 1);
+	    quickSort(a, i + 1, hi);
+	}
+
+	Another implementation（algorithms 4th edition）:
+
+	void quickSort(int* a, int lo, int hi)
+	{
+	    if (lo >= hi) 
+		return;
+	    int pivot = a[lo], i = lo, j = hi + 1;
+
+	    while (true)
+	    {	
+	        while (a[++i] < pivot)		//from the second element, as long as the current element is less than pivot, keep going right, at last i end up with an element >= pivot.
+		    if (i == hi)		//to avoid i crossing the boundary
+			break;
+
+		while (a[--j] > pivot)		//from the last element, as long as the current element is more than pivot, keep going left, at last j end up with an element <= pivot.
+		    if (j == lo)		//to avoid j crossing the boundary
+			break;
+
+		if (i >= j)			//i > j: a[j] < pivot && a[i] > pivot && j + 1 == i;
+		    break;			//i = j: a[i] == a[j] == pivot
+
+		std::swap(a[i], a[j]);		//i < j: a[j] < pivot && a[i] > pivot ----> swap(a[i], a[j]);
+	    }
+	    std::swap(a[j], a[lo]);		//at last, a[lo+1]...a[j] <= pivot <= a[i]...a[hi] : so swap(a[lo], a[j])
+	    quickSort(a, lo, j - 1);
+	    quickSort(a, j + 1, hi);
+	}
 ## Code deduction
                     a[]
     Index:  0   1   2   3   4   5   6
