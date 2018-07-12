@@ -73,7 +73,7 @@ Another implementation（algorithms 4th edition）:
 			break;
 
 		while (a[--j] > pivot);		//from the last element, as long as the current element is more than pivot, keep going left, at last j end up with an element <= pivot. 
-						//Here the judgement that j reaches the left edge is omitted because it is redundant.
+						//Here the judgement that "j == lo ? break : ;" is omitted because it is redundant.
 		if (i >= j)			//i > j: a[j] < pivot && a[i] > pivot && j + 1 == i;
 		    break;			//i = j: a[i] == a[j] == pivot
 
@@ -86,14 +86,16 @@ Another implementation（algorithms 4th edition）:
 comparison:
 
 	The first implementation needn't do swap operation and the operation to scan the array is almost constant, so it's more efficient, i think. :)
-## Code deduction
+	
+## Code deduction (just do one traversal)
                     a[]
     Index:  0   1   2   3   4   5   6
     Data:   5   1   6   2   7   9   3
-        
+     
     pivot = a[0] = 5;   
     Traverse direction: j -> i;
     
+	The first implementation:
             i                       j
     Data:   5   1   6   2   7   9   3       //Traverse direction: j -> i;		a[j] < pivot: a[i++] = a[j];  
                 i                   j
@@ -110,3 +112,27 @@ comparison:
     Data:   3   1   2   2   7   9   6       //Traverse direction: i -> j(changed);	a[i] = pivot;
                        ij
     Data:   3   1   2   5   7   9   6       //finished; then quickSort recursion
+	
+	The second implementation:
+	        i                       	j
+    Data:   5   1   6   2   7   9   3		//Traverse direction: i -> j;	
+	        	i                       j
+    Data:   5   1   6   2   7   9   3		//a[++i] < pivot
+	        		i                   j
+    Data:   5   1   6   2   7   9   3		//a[++i] > pivot: Traverse direction: j -> i;
+	        		i               j
+    Data:   5   1   6   2   7   9   3		//a[--j] < pivot: Traverse direction: i -> j;
+	        		i               j
+    Data:   5   1   3   2   7   9   6		//i < j: swap(a[i], a[j]);
+	        			i           j
+    Data:   5   1   3   2   7   9   6		//a[++i] < pivot
+	        				i       j
+    Data:   5   1   3   2   7   9   6		//a[++i] > pivot: Traverse direction: j -> i;
+	        				i   j
+    Data:   5   1   3   2   7   9   6		//a[--j] > pivot
+	        				ij
+    Data:   5   1   3   2   7   9   6		//a[--j] > pivot
+	        			j	i
+    Data:   5   1   3   2   7   9   6		//a[--j] < pivot: Traverse direction: i -> j;
+	        			j	i
+    Data:   2   1   3   5   7   9   6		//i > j, swap(a[lo], a[j])
