@@ -57,9 +57,8 @@ Digital simulation:
 
 	    quickSort(a, lo, i - 1);
 	    quickSort(a, i + 1, hi);
-	}
-	
-	-------------	Another implementation（algorithms 4th edition）:	--------------
+	}	
+Another implementation（algorithms 4th edition）:
 
 	void quickSort(int* a, int lo, int hi)
 	{
@@ -73,10 +72,8 @@ Digital simulation:
 		    if (i == hi)		//to avoid i crossing the boundary
 			break;
 
-		while (a[--j] > pivot)		//from the last element, as long as the current element is more than pivot, keep going left, at last j end up with an element <= pivot.
-		    if (j == lo)		//to avoid j crossing the boundary
-			break;
-
+		while (a[--j] > pivot);		//from the last element, as long as the current element is more than pivot, keep going left, at last j end up with an element <= pivot. 
+						//Here the judgement that j reaches the left edge is omitted because it is redundant.
 		if (i >= j)			//i > j: a[j] < pivot && a[i] > pivot && j + 1 == i;
 		    break;			//i = j: a[i] == a[j] == pivot
 
@@ -86,8 +83,8 @@ Digital simulation:
 	    quickSort(a, lo, j - 1);
 	    quickSort(a, j + 1, hi);
 	}
-	
-	-------------	comparison:	--------------
+comparison:
+
 	The first implementation needn't do swap operation and the operation to scan the array is almost constant, so it's more efficient, i think. :)
 ## Code deduction
                     a[]
