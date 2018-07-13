@@ -114,25 +114,25 @@ comparison:
     Data:   3   1   2   5   7   9   6       //finished; then quickSort recursion
 	
 	The second implementation:
-	        i                       	j
+	    	i	          	    j
     Data:   5   1   6   2   7   9   3		//Traverse direction: i -> j;	
-	        	i                       j
+	            i	          	    j
     Data:   5   1   6   2   7   9   3		//a[++i] < pivot
-	        		i                   j
+                    i		    j
     Data:   5   1   6   2   7   9   3		//a[++i] > pivot: Traverse direction: j -> i;
-	        		i               j
+			i               j
     Data:   5   1   6   2   7   9   3		//a[--j] < pivot: Traverse direction: i -> j;
-	        		i               j
+	                i               j
     Data:   5   1   3   2   7   9   6		//i < j: swap(a[i], a[j]);
-	        			i           j
+	                    i           j
     Data:   5   1   3   2   7   9   6		//a[++i] < pivot
-	        				i       j
+	                        i       j
     Data:   5   1   3   2   7   9   6		//a[++i] > pivot: Traverse direction: j -> i;
-	        				i   j
+	                        i   j
     Data:   5   1   3   2   7   9   6		//a[--j] > pivot
-	        				ij
+	                        ij
     Data:   5   1   3   2   7   9   6		//a[--j] > pivot
-	        			j	i
+	                    j   i
     Data:   5   1   3   2   7   9   6		//a[--j] < pivot: Traverse direction: i -> j;
-	        			j	i
+	                    j   i
     Data:   2   1   3   5   7   9   6		//i > j, swap(a[lo], a[j])
